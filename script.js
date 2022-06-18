@@ -56,7 +56,7 @@ function setUpTime(){
       const minutes = Math.floor((distance%hour)/minute)
       const seconds = Math.floor((distance%minute)/second)
       inputContainer.hidden=true;
-      if(distance<0){
+      if(distance>0){
         //หมดเวลา
         countDownEl.hidden=true;
         completeEl.hidden=false;
@@ -87,5 +87,18 @@ function callDataInStore(){
 
   }
 }
+
+function reset(){
+  localStorage.removeItem('countDown')
+  countDownEl.hidden=true;
+  completeEl.hidden=true;
+  inputContainer.hidden=false;
+  clearInterval(countDownActive)
+  countDownTitle=''
+  countDownDate=''
+}
+
+countDownButton.addEventListener('click',reset)
+completeButton.addEventListener('click',reset)
 
 callDataInStore()
